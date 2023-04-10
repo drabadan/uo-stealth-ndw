@@ -28,3 +28,4 @@ const MOVE_ITEM_DELAY_MS = 300;
 
 const MEDITATION_FAIL_MSG = 'perform|doing|cant focus';
 const MEDITATION_FINISH_MSG = 'lose';
+var REGS_CONST: array[0..7] of Word = [BP, BM, MR, NS, SS, SA, GA, GS];
