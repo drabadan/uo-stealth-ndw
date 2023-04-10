@@ -1,17 +1,31 @@
-procedure Executor(var state: TState; const command: TCommand);
+function RegsAvailable(regs: array of Word): boolean;
+var i, tq: Integer;
 begin
-    AddToSystemJournal('Casting Spell: ' + command.Title);
+  tq := 0;
+  for i := regs.Low to regs.High do
+    begin
+      FindType(regs[i], Backpack);
+      tq := tq + FindFullQuantity;
+    end;
+
+  // It's always one reg per cast so we need as many regs as there is different required
+  Result := tq >= regs.Length;
 end;
 
-function Condition(const state: TState): boolean;
+function CanCast(Spell: TSpell): boolean;
 begin
-    Result := True;
+  Result := (Spell.ManaRequired <= Mana) AND RegsAvailable(Spell.Regs);
 end;
 
-// constructor
-function CastSpellAction(const SpellName: String; const ManaRequired: Word): TCommand;
+procedure CastSpell(Spell: TSpell; TargetID: Cardinal);
 begin
-    Result.Title := 'Cast Spell ' + SpellName;
-    Result.Condition := @Condition;
-    Result.Executor := @Executor;
-end;
+  if NOT CanCast(Spell) then
+    begin 
+      AddToSystemJournal('[Critical] Cannot cast Spell ', Spell.SpellName);
+      Exit;
+    end;  
+  if (Spell.Targeted) then
+    WaitTargetObject(TargetID);
+  Cast(Spell.SpellName);
+  WaitJournalLine(Now, 'fizzles', 3000);  
+ end;

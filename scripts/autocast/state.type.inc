@@ -7,4 +7,6 @@ type
     TBuffTargetArray = Array of TBuffTarget;
     TState = record
         BuffTargets: TBuffTargetArray;
+        MinPerRegQuantity, LoadRegsQuantity: Integer;
+        CriticalManaValue, MinIntValue: Integer;
     end;
