@@ -5,8 +5,7 @@ program Autocast;
 {$I 'constants.inc'}
 {$I 'C:\Users\49160\dev\uo\scripts\stealth\pascal\packages\common\types.inc'}
 {$I 'C:\Users\49160\dev\uo\scripts\stealth\pascal\packages\core\queue.inc'}
-{$I 'C:\Users\49160\dev\uo\scripts\stealth\pascal\packages\actions\magery\cast-spell.inc'}
-{$I 'C:\Users\49160\dev\uo\scripts\stealth\pascal\packages\actions\magery\buff-spells.inc'}
+{$I 'C:\Users\49160\dev\uo\scripts\stealth\pascal\packages\magery\cast-spell.inc'}
 {$I 'Actions.inc'}
 {$ENDREGION}
 
