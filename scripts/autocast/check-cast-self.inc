@@ -5,6 +5,7 @@ end;
 
 procedure CheckCastSelfExecutor(var state: TState; const command: TCommand);
 begin
+  AddToSystemJournal('Buff self');
   CastSpell(DispelSpell, Self);
   CastSpell(BlessSpell, Self);
   CastSpell(CunningSpell, Self);

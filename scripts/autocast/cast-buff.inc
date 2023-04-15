@@ -23,12 +23,10 @@ begin
           if spell.SpellName <> '' then
             begin
               AddToSystemJournal('Casting: ' + spell.SpellName);
-              // CastSpell(spell); 
+              CastSpell(spell, target.Serial); 
             end;
         end;
     end;
-
-  // CancelRunning();
 end;
 
 function CastBuffsAction(): TCommand;

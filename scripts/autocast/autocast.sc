@@ -24,7 +24,7 @@ begin
 end; 
 {$ENDREGION}
 
-function InitState(): TState;
+function GetInitialState(): TState;
 begin
   // Minimum REG count to restock
   Result.MinPerRegQuantity := 10;
@@ -35,11 +35,12 @@ begin
 end;
 
 begin
+  gState := GetInitialState();
   SetEventProc(evSpeech,'UnicodeSpeech');
   RegisterActions([
-    //RestockRegs(),
-    //CheckManaAction(),    
-    //CheckCastSelfAction(),
+    RestockRegs(),
+    CheckManaAction(),    
+    CheckCastSelfAction(),
     CastBuffsAction()
   ]);
   RunUntilCancel(gState);
