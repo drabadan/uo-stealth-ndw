@@ -1,7 +1,7 @@
 const SPEECH_PATTERNS = ['0', '1', '01', '2', '12', '012', '3', '123', '0123', '4', '6', '666', '5', 'Каст', 'Себя'];
 // Matches index in array with Speech pattern
 
-const SPELLS_MATCH = [
+var SPELLS_MATCH: array[0..9] of string = [
     // 0
     'Dispel', 
     // 1

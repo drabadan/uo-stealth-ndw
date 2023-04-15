@@ -18,14 +18,22 @@ begin
 end;
 
 procedure CastSpell(Spell: TSpell; TargetID: Cardinal);
+var
+  stime: TDateTime;
+  varMana: Word;
 begin
   if NOT CanCast(Spell) then
     begin 
       AddToSystemJournal('[Critical] Cannot cast Spell ', Spell.SpellName);
       Exit;
     end;  
+  varMana := Mana;
+  stime := Now;
   if (Spell.Targeted) then
     WaitTargetObject(TargetID);
   Cast(Spell.SpellName);
-  WaitJournalLine(Now, 'fizzles', 3000);  
+  repeat  
+    InJournalBetweenTimes('fizzles', stime, Now);
+    wait(100);
+  until (LineCount > 0) or (varMana > Mana) or (Now > stime + (0.2 / 1440)) or Dead;
  end;

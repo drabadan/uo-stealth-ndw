@@ -1,12 +1,12 @@
 program Autocast;
 
 {$REGION 'Includes'}
-{$I 'state.type.inc'}
-{$I 'constants.inc'}
 {$I 'C:\Users\49160\dev\uo\scripts\stealth\pascal\packages\common\types.inc'}
+{$I 'constants.inc'}
+{$I 'state.type.inc'}
 {$I 'C:\Users\49160\dev\uo\scripts\stealth\pascal\packages\core\queue.inc'}
 {$I 'C:\Users\49160\dev\uo\scripts\stealth\pascal\packages\magery\cast-spell.inc'}
-{$I 'Actions.inc'}
+{$I 'actions.inc'}
 {$ENDREGION}
 
 {$REGION 'Speech-manager'}
@@ -37,9 +37,9 @@ end;
 begin
   SetEventProc(evSpeech,'UnicodeSpeech');
   RegisterActions([
-    RestockRegs(),
-    CheckManaAction(),    
-    CheckCastSelfAction(),
+    //RestockRegs(),
+    //CheckManaAction(),    
+    //CheckCastSelfAction(),
     CastBuffsAction()
   ]);
   RunUntilCancel(gState);

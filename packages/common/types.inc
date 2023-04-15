@@ -6,7 +6,8 @@ type
     Harmfull: boolean;
     Buff: boolean;
     Targeted: boolean;
-end;
+  end;
+  TSpellArray = Array of TSpell;
 
 function DispelSpell: TSpell;
 begin
@@ -57,4 +58,18 @@ begin
   Result.Harmfull := False;
   Result.Buff:= True;
   Result.Targeted:= True;
+end;
+
+var SpellsCollection: TSpellArray = [DispelSpell, BlessSpell, CunningSpell, StrengthSpell, AgilitySpell];
+
+function FindSpellByName(SpellName: String): TSpell;
+var i: Integer;
+begin
+  for i:= SpellsCollection.Low to SpellsCollection.High do
+      if SpellsCollection[i].SpellName = SpellName then
+        begin
+          Result := SpellsCollection[i];
+          Exit;
+        end;
+  AddToSystemJournal('[WARNING] Unknown spell name: ' + SpellName);
 end;
