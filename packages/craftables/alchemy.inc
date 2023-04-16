@@ -1,4 +1,5 @@
 var DEFAULT_ALCHEMY_TOOL_TYPES: array of Word = [$1849, $184B, $184A, $184C];
+const ALCHEMY_MENU_STRING = 'Make what?';
 
 function LesserStrengthPotion: TCraftable;
 begin
@@ -9,7 +10,7 @@ begin
     Result.Reagents[0].Title := 'Mandrake root';
     Result.Crafting.ToolGraphics := DEFAULT_ALCHEMY_TOOL_TYPES;
     Result.Crafting.ToolTarget := MR;
-    Result.Crafting.MainMenuString := 'wish to make?';
+    Result.Crafting.MainMenuString := ALCHEMY_MENU_STRING;
     Result.Crafting.MenuChoice := 'lesser strength potion';
 end;
 
@@ -22,6 +23,6 @@ begin
     Result.Reagents[0].Title := 'Nightshade';
     Result.Crafting.ToolGraphics := DEFAULT_ALCHEMY_TOOL_TYPES;
     Result.Crafting.ToolTarget := NS;
-    Result.Crafting.MainMenuString := 'wish to make?';
-    Result.Crafting.MenuChoice := 'deadly poison potion';
+    Result.Crafting.MainMenuString := ALCHEMY_MENU_STRING;
+    Result.Crafting.MenuChoice := 'a deadly poison potion';
 end;

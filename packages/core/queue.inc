@@ -67,12 +67,13 @@ var
   procedure ExecCommand(command: TCommand; state: TState);
   begin
     if command.Condition(state) then 
+      begin        
         command.Executor(state, command);
         Wait(DELAY_BETWEEN_RUNS_MS);
     end;
   end;
 
-  procedure Run(state: TState);
+  procedure Run(var state: TState);
   var i: Integer;
   begin
     for i := gQueue.HighPrio.Low to gQueue.HighPrio.High do
@@ -85,7 +86,7 @@ var
     Wait(DELAY_BETWEEN_RUNS_MS);
   end;
 
-  procedure RunUntilCancel(state: TState);
+  procedure RunUntilCancel(var state: TState);
   begin
     while not gQueue.CancellationToken do
       Run(state);

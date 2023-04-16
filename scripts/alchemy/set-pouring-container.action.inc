@@ -3,7 +3,7 @@ begin
   Result := state.CurrentPouringContainerId = 0;
 end;
 
-function FindMyKeg(Container: Cardinal; state: TState): Cardinal;
+function FindMyKeg(Container: Cardinal; var state: TState): Cardinal;
 var
   i: Integer;
   tooltip: String;
@@ -38,19 +38,20 @@ begin
 end;
 
 procedure SetCurrentPouringContainerExecutor(var state: TState; const command: TCommand);
+var value: Cardinal;
 begin
   if (state.PouringContainerGraphic = KEG_GRAPHIC) then
-    state.CurrentPouringContainerId := FindMyKeg(Backpack, state)
+    value := FindMyKeg(Backpack, state)
   else 
     begin
       FindTypesArrayEx([$0F0E], [$0000], [backpack, Ground], false);
       if FindCount > 0 then         
-        state.CurrentPouringContainerId := FindItem
+        value := FindItem
       else 
-        AddToSystemJournal('[Critical] Cannot find empty bottles.');
+        AddToSystemJournal('[Critical] Cannot find empty bottles.');  
     end;   
-  // gState := state;
-  AddToSystemJournal(state.CurrentPouringContainerId);
+
+  gState.CurrentPouringContainerId := value;  
 end;
 
 function SetCurrentPouringContainerAction(): TCommand;

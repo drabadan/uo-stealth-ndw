@@ -31,5 +31,5 @@ begin
     SetCurrentPouringContainerAction(),
     CraftOnePotionAction()
   ]);
-  Run(gState);
+  RunUntilCancel(gState);
 end.
