@@ -2,11 +2,13 @@ program Autocast;
 
 {$REGION 'Includes'}
 {$I 'C:\Users\49160\dev\uo\scripts\stealth\pascal\packages\common\types.inc'}
+{$I 'C:\Users\49160\dev\uo\scripts\stealth\pascal\packages\common\constants.inc'}
 {$I 'constants.inc'}
 {$I 'state.type.inc'}
 {$I 'C:\Users\49160\dev\uo\scripts\stealth\pascal\packages\core\queue.inc'}
 {$I 'C:\Users\49160\dev\uo\scripts\stealth\pascal\packages\magery\cast-spell.inc'}
 {$I 'actions.inc'}
+
 {$ENDREGION}
 
 {$REGION 'Speech-manager'}

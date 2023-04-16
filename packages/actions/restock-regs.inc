@@ -20,11 +20,11 @@ begin
   for i := REGS_CONST.Low to REGS_CONST.High do
     begin
       FindType(REGS_CONST[i], Backpack);      
-      d := state.LoadRegsQuantity - FindFullQuantity;      
+      d := state.LoadRegsQuantity - FindFullQuantity;   
       if d <= 0 then
         Continue;
       if NOT (MoveItem(FindType(REGS_CONST[i], Ground), d, Backpack, 0,0,0)) then
-        AddToSystemJournal('[Critical] Cannot load Regs from floor: ', REGS_CONST[i]);
+        AddToSystemJournal('[Critical] Cannot load Regs from floor: ' + REGS_CONST_NAMES[i]);
       Wait(MOVE_ITEM_DELAY_MS);
     end;
 end;

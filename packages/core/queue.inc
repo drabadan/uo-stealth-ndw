@@ -67,7 +67,6 @@ var
   procedure ExecCommand(command: TCommand; state: TState);
   begin
     if command.Condition(state) then 
-      begin
         command.Executor(state, command);
         Wait(DELAY_BETWEEN_RUNS_MS);
     end;
