@@ -15,7 +15,7 @@ Program Alchemy;
 function GetInitialState(): TState;
 begin  
   Result.RunsCount := 0;
-  Result.CurrentCraftable := DeadlyPoisonPotion;
+  Result.CurrentCraftable := InvisibilityPotion;
   Result.PouringContainerGraphic := KEG_GRAPHIC;
   Result.CurrentPouringContainerId := 0;
   Result.MinPerRegQuantity := 10;
@@ -27,7 +27,7 @@ end;
 begin
   gState := GetInitialState();
    RegisterActions([
-    RestockRegs(),
+    RestockCraftableRegs(),    
     SetCurrentPouringContainerAction(),
     CraftOnePotionAction()
   ]);

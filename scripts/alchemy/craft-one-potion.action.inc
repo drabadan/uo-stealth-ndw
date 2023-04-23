@@ -27,9 +27,7 @@ begin
       Exit;
     end;
 
-  WaitGump('0');  
-  
-  AddToSystemJournal(craftConfig.MainMenuString  + ' ' + craftConfig.MenuChoice);
+  WaitGump('0');
   WaitTargetType(state.CurrentCraftable.Reagents[0].Graphic);
   WaitMenu(craftConfig.MainMenuString, craftConfig.MenuChoice);
   UseObject(FindItem);  
