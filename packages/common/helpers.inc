@@ -10,3 +10,21 @@ begin
   end;
   List.Free;
 end;
+
+function WaitGumpMaxMS(WaitTimeMS: Word; GumpID: Cardinal): boolean;
+const MIN_WAIT_TIME_MS = 100;
+var
+  i, k: Integer;
+begin
+  for i := 0 to Integer((WaitTimeMS / MIN_WAIT_TIME_MS)) do
+    begin
+      for k:=0 to GetGumpsCount-1 do
+        if GetGumpID(k) = GumpID then
+          begin
+            Result := True;
+            Exit;
+          end;
+      Wait(MIN_WAIT_TIME_MS);
+    end;    
+  Result := False;
+end;

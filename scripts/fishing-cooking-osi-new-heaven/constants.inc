@@ -1,0 +1,15 @@
+const MAX_CRAFT_WAIT_TIME_MS = 10000;
+const RAW_FISH_STEAK_TYPE = $097A;
+const FISHING_POLE_TYPE = $0DBF;
+const MAX_FISHING_TIME_MS = 12000;
+const FISHING_MSG = 'You fish a while|pull out an item|reach the water there|seem to be biting';
+var CUT_FISH_TOOLS: Array of Word = [$F51];
+const SKILLET_TYPE = $97F;
+const COOKING_GUMP_CATEGORY_BARBEQUE = 9004;
+const COOKING_GUMP_FISH_STEAK = 38;
+const COOKING_GUMP_ID = $1CC;
+var SHOES_FROM_FISHING: Array of Word = [$170E, $170C, $1712, $1710, $170B, $1711, $170F, $170D];
+var PRIZED_FISHES: Array of Word = [$0DD6];
+const TINKERING_SKILLET_NUM_GUMP_BUTTON = 26;
+const TINKER_TOOLS = $1EB9;
+const IRON_INGOT_TYPE = $1BF2;
