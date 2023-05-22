@@ -33,6 +33,8 @@ begin
     WaitGumpMaxMS(5000, COOKING_GUMP_ID);
     FindType(SKILLET_TYPE, Backpack);
   until FindCount > 3;
+
+  CloseAllGumps();
 end;
 
 function CraftSkilletAction(): TCommand;

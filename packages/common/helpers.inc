@@ -27,4 +27,12 @@ begin
       Wait(MIN_WAIT_TIME_MS);
     end;    
   Result := False;
+  AddToSystemJournal('[Warning] Gump: ', GumpID, ' not found!');
+end;
+
+procedure CloseAllGumps();
+var i: Integer;
+begin
+  for i:=0 to GetGumpsCount-1 do
+    if IsGumpCanBeClosed(i) then CloseSimpleGump(i);
 end;

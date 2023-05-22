@@ -22,14 +22,19 @@ begin
 end;
 
 procedure CookFishSteakExecutor(var state: TState; const command: TCommand);
+const MAX_RETRY_COUNTER = 200;
+var counter: Integer;
 begin
   AddToSystemJournal('[INFO] Going cooking!');
   NewMoveXY(state.ForgePoint.X, state.ForgePoint.Y, true, 1, true);
   FindType(RAW_FISH_STEAK_TYPE, Backpack);
   MoveItem(FindItem, FindFullQuantity - 1, Ground, GetX(Self)-1, GetY(Self), GetZ(Self));
   Wait(1000);
+  counter := 0;
   While FindType(RAW_FISH_STEAK_TYPE, Ground) > 0 do
     begin
+      Inc(counter);
+      if counter > MAX_RETRY_COUNTER then AddToSystemJournal('[Warning] Max retries counter: ', counter,' over limit!');
       if FindType(RAW_FISH_STEAK_TYPE, Backpack) = 0 then
         begin
           MoveItem(FindType(RAW_FISH_STEAK_TYPE, Ground), 1, Backpack, 0,0,0);
@@ -39,6 +44,8 @@ begin
       NumGumpButton(GetGumpsCount-1, COOKING_GUMP_FISH_STEAK);
       WaitGumpMaxMS(5000, COOKING_GUMP_ID);
     end;
+
+  CloseAllGumps();
 end;
 
 function CookFishSteakAction(): TCommand;
