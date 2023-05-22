@@ -1,7 +1,6 @@
 function SellFishingLootCondition(const state: TState): boolean;
 begin
   FindTypesArrayEx(state.AllLootTypesToSell, [$FFFF], [Backpack], false);
-  AddToSystemJournal('Found Loot Items ', FindCount);
   Result := FindCount >= state.GoSellLootFlag;
 end;
 

@@ -1,7 +1,7 @@
 function CraftSkilletCondition(const state: TState): boolean;
 begin
   FindType(SKILLET_TYPE, Backpack);
-  Result := FindCount <= 1;
+  Result := FindCount <= 2;
 end;
 
 procedure GetTinkeringGump();
@@ -27,12 +27,7 @@ begin
   AddToSystemJournal('[INFO] Crafting skillets!');
   repeat
     FindType(IRON_INGOT_TYPE, Backpack);
-    if FindFullQuantity < 80 then AddToSystemJournal('[Warning] Low on Iron ingots');
-    if FindType(RAW_FISH_STEAK_TYPE, Backpack) = 0 then
-      begin
-        MoveItem(FindType(RAW_FISH_STEAK_TYPE, Ground), 1, Backpack, 0,0,0);
-        Wait(1000);
-      end;        
+    if FindFullQuantity < 80 then AddToSystemJournal('[Warning] Low on Iron ingots');   
     GetTinkeringGump();
     NumGumpButton(GetGumpsCount-1, TINKERING_SKILLET_NUM_GUMP_BUTTON);
     WaitGumpMaxMS(5000, COOKING_GUMP_ID);

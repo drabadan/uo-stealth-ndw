@@ -38,7 +38,7 @@ begin
   Result.CookingSteaksQuantityFlag := 80;
   Result.ForgePoint.X := 3525;
   Result.ForgePoint.Y := 2536;
-  Result.GoSellLootFlag := 1;
+  Result.GoSellLootFlag := 25;
   Result.LootShops := InitLootShops();
   Result.AllLootTypesToSell := SHOES_FROM_FISHING + PRIZED_FISHES;
 end;
