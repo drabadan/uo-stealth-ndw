@@ -4,21 +4,26 @@ begin
   Result := FindCount <= 2;
 end;
 
-procedure GetTinkeringGump();
-var
-  i: Integer;
+function FindTool(ToolType: Word): Cardinal;
 begin
-  for i := 0 to GetGumpsCount-1 do
-    if (GetGumpID(i) = COOKING_GUMP_ID) then Exit;
-      
-  if FindType(TINKER_TOOLS, Backpack) = 0 then
+  if FindType(ToolType, Backpack) = 0 then
     begin
       AddToSystemJournal('[Critical] Tinker tools not found!');
       Exit;
     end;
 
   if FindCount < 3 then AddToSystemJournal('[Warning] Low on tinker tools: ', FindCount);
-  UseObject(FindItem);
+  Result := FindItem;
+end;
+
+procedure GetTinkeringGump(GumpSerial: Cardinal);
+var
+  i: Integer;
+begin
+  for i := 0 to GetGumpsCount-1 do
+    if (GetGumpSerial(i) = GumpSerial) then Exit else CloseSimpleGump(i);      
+ 
+  UseObject(GumpSerial);
   if NOT WaitGumpMaxMS(3000, COOKING_GUMP_ID) then AddToSystemJournal('[Critical] No Craft gump present!');  
 end;
 
@@ -27,13 +32,14 @@ begin
   AddToSystemJournal('[INFO] Crafting skillets!');
   repeat
     FindType(IRON_INGOT_TYPE, Backpack);
-    if FindFullQuantity < 80 then AddToSystemJournal('[Warning] Low on Iron ingots');   
-    GetTinkeringGump();
+    if FindFullQuantity < 80 then AddToSystemJournal('[Warning] Low on Iron ingots');       
+    GetTinkeringGump(FindTool(TINKER_TOOLS));
     NumGumpButton(GetGumpsCount-1, TINKERING_SKILLET_NUM_GUMP_BUTTON);
     WaitGumpMaxMS(5000, COOKING_GUMP_ID);
     FindType(SKILLET_TYPE, Backpack);
   until FindCount > 3;
 
+  Wait(3000);
   CloseAllGumps();
 end;
 

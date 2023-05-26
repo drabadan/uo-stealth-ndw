@@ -34,5 +34,5 @@ procedure CloseAllGumps();
 var i: Integer;
 begin
   for i:=0 to GetGumpsCount-1 do
-    if IsGumpCanBeClosed(i) then CloseSimpleGump(i);
+    CloseSimpleGump(i);
 end;
