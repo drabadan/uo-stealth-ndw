@@ -4,7 +4,7 @@ program StealFanDancer;
 {$I 'C:\Users\49160\dev\uo\scripts\stealth\pascal\packages\common\helpers.inc'}
 
 const
-  TARGET_ID = $06CBC836;
+  TARGET_ID = $06D5A296;//$06CBC836;
 begin
   while Not Dead and Connected and (GetSkillValue('Ninjitsu') < 120) do
     begin

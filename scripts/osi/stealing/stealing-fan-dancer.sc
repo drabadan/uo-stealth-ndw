@@ -34,7 +34,7 @@ const
 
   procedure Heal(targetID: cardinal);
   begin
-    if GetHP(targetID) < (GetMaxHp(targetID) * 0.9) then
+    while GetHP(targetID) < (GetMaxHp(targetID) * 0.9) do
     begin
       WaitTargetObject(targetID);
       Cast('Heal');
@@ -43,12 +43,17 @@ const
   end;
 
 var
-  LOOT_TYPES: array of word = [$EED];
+  LOOT_TYPES: array of word = [
+    // Gold
+    $EED,
+    // Stones
+    $F0F, $F13, $F10, $F11, $F15, $F26, $F18, $F25, $F16
+   ];
   startPoint: TPoint;
   availableCorpses, lootItems: array of cardinal;
   i, k, waitDelta: integer;
 begin
-  FindDistance := 10;
+  FindDistance := 4;
   IgnoreReset;
 
   startPoint.X := GetX(Self);
@@ -56,12 +61,12 @@ begin
 
   while not Dead do
   begin
-    while FindType($F7, Ground) > 0 do
-      while not Steal(FindItem) do
-      begin
-        Wait(100);
-        Heal(Self);
-      end;
+    // while FindType($F7, Ground) > 0 do
+    //   while not Steal(FindItem) do
+    //   begin
+    //     Wait(100);
+    //     Heal(Self);
+    //   end;
 
     NewMoveXY(startPoint.X, startPoint.Y, True, 1, True);
     waitDelta := 6000;
@@ -69,6 +74,7 @@ begin
     GetFoundItemsFromStringList(availableCorpses);
     for i := 0 to High(availableCorpses) do
     begin
+      Heal(Self);
       NewMoveXY(GetX(availableCorpses[i]), GetY(availableCorpses[i]), True, 1, True);
       UseObject(availableCorpses[i]);
       if WaitJournalLine(Now, 'did not earn the right', 2000) then
@@ -80,6 +86,7 @@ begin
       GetFoundItemsFromStringList(lootItems);
       for k := 0 to High(lootItems) do
         if LOOT_TYPES.Contains(GetType(lootItems[k])) or
+          StrContains(LowerCase(GetTooltip(lootItems[k])), 'minor magic') or
           StrContains(LowerCase(GetTooltip(lootItems[k])), 'legendary artifact') or
           StrContains(LowerCase(GetTooltip(lootItems[k])), 'major artifact') or 
           StrContains(LowerCase(GetTooltip(lootItems[k])), 'greater artifact') then
